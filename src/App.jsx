@@ -1,12 +1,13 @@
-import { useState } from "react";
 import Router from "./shared/Router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [users, setusers] = useState(null);
 
   return (
     <>
       <Router />
+      <ToastContainer />
     </>
   );
 }

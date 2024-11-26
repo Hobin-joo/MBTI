@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import AuthForm from "../components/AuthForm";
-import { login, getUserProfile } from "../api/auth";
+import { login } from "../api/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
   const handleLogin = async (formData) => {
     try {
       const { nickname } = await login(formData);
-      
+      toast.info("로그인 성공");
       navigate("/");
     } catch (error) {
-      alert("로그인에 실패했습니다. 다시 시도해주세요.");
+      toast.info("로그인에 실패했습니다. 다시 시도해주세요.");
     }
   };
 

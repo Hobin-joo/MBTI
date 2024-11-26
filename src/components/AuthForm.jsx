@@ -31,7 +31,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         name="id"
         value={formData.id}
         onChange={handleChange}
-        placeholder="아이디"
+        placeholder="아이디를 입력하세요"
         required
       />
       <input
@@ -39,7 +39,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         name="password"
         value={formData.password}
         onChange={handleChange}
-        placeholder="비밀번호"
+        placeholder="비밀번호를 입력하세요"
         required
       />
       {mode === "signup" && (
@@ -48,7 +48,7 @@ const AuthForm = ({ mode, onSubmit }) => {
           name="nickname"
           value={formData.nickname}
           onChange={handleChange}
-          placeholder="닉네임"
+          placeholder="닉네임을 입력하세요"
           required
           className="w-full p-4 border border-gray-300 rounded-lg"
         />

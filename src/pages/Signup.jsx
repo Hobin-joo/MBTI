@@ -2,6 +2,7 @@ import React from "react";
 import AuthForm from "../components/AuthForm";
 import { register } from "../api/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -10,8 +11,10 @@ const Signup = () => {
   const handleSignup = async (formData) => {
     try {
       await register(formData);
+      toast.info("회원가입 완료");
+      navigate("/login");
     } catch (error) {
-      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+      toast.info("회원가입에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
