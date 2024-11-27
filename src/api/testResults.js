@@ -24,8 +24,12 @@ export const createTestResult = async (mbtiResult) => {
 
 //삭제
 export const deleteTestResult = async (id) => {
-  // const response = await axios(API_URL);
+  const response = await axios.delete(`${API_URL}/${id}`);
+  return response.data;
 };
 
 //비공개
-export const updateTestResultVisibility = async (id, visibility) => {};
+export const updateTestResultVisibility = async (id, visibility) => {
+  const response = await axios.delete(`${API_URL}/${id}`, { visibility });
+  return response.data;
+};

@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { getTestResults } from "../api/testResults";
+import React from "react";
+import { deleteTestResult } from "../api/testResults";
 
 const TestResultItem = ({ results, setResults }) => {
-  console.log(results);
+  const handelDelete = async () => {
+    await deleteTestResult();
+    
+  };
+
   return (
     <>
       {results.map((result, id) => (
@@ -11,6 +15,7 @@ const TestResultItem = ({ results, setResults }) => {
           <p>{result.mbtiResult}</p>
           <p>{result.createAt}</p>
           <p>{result.mbtiType}</p>
+          <button onClick={handelDelete}>삭제</button>
         </div>
       ))}
     </>
