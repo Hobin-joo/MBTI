@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { updateProfile } from "../api/auth";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const Profile = ({ user, setUser }) => {
+const Profile = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [nickname, setNickname] = useState(user?.nickname || "");
+  const navigate = useNavigate();
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
@@ -12,22 +15,18 @@ const Profile = ({ user, setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
       if (!user) {
         toast.info("로그인 하세요");
       }
       const token = user.accessToken;
-      console.log(token);
       const formData = new FormData();
       formData.append("nickname", nickname);
-      console.log(formData);
 
       const updatedProfile = await updateProfile(formData, token);
-      console.log(updatedProfile);
       const updatedUser = { ...user, nickname: updatedProfile.nickname };
       localStorage.setItem("user", JSON.stringify(updatedUser));
-      setUser(updatedUser);
       toast.info("업데이트 성공");
+      navigate("/");
     } catch (error) {
       console.error(error);
     }

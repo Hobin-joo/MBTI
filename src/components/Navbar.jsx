@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const StHeader = styled.header`
@@ -13,7 +14,15 @@ const StDiv = styled.div`
   display: flex;
   gap: 40px;
 `;
+
 const Navbar = () => {
+  const nav = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    toast.success("로그아웃");
+    nav("/login");
+  };
   return (
     <>
       <StHeader>
@@ -21,11 +30,10 @@ const Navbar = () => {
           <Link to="/">홈</Link>
         </div>
         <StDiv>
-          <Link to="/login">로그인</Link>
           <Link to="/profile">프로필</Link>
-          <Link to="/test">테스트</Link>
-          <Link to="testResult">결과</Link>
-          <Link to="/login">로그아웃</Link>
+          <Link to="/testpage">테스트</Link>
+          <Link to="result">결과</Link>
+          <button onClick={handleLogout}>로그아웃</button>
         </StDiv>
       </StHeader>
     </>

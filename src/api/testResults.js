@@ -1,15 +1,31 @@
 import axios from "axios";
+import { mbtiDescriptions } from "../utils/mbtiCalculator";
 
 const API_URL = "http://localhost:5000/testResults";
 
+//
 export const getTestResults = async () => {
   const response = await axios.get(API_URL);
   return response.data;
 };
 
-export const createTestResult = async (resultData) => {};
+//생성
+export const createTestResult = async (mbtiResult) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const mbtiType = mbtiDescriptions[mbtiResult];
+  const result = {
+    user: currentUser.nickname,
+    createAt: new Date(),
+    mbtiType,
+    mbtiResult,
+  };
+  await axios.post(API_URL, result);
+};
 
-export const deleteTestResult = async (id) => {};
+//삭제
+export const deleteTestResult = async (id) => {
+  // const response = await axios(API_URL);
+};
 
+//비공개
 export const updateTestResultVisibility = async (id, visibility) => {};
-

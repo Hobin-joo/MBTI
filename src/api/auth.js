@@ -8,13 +8,12 @@ export const register = async (userData) => {
 
 export const login = async (userData) => {
   const response = await Api.post("/login", userData);
+
   const { accessToken, userId, nickname } = response.data;
 
   //토큰 저장 함수
-  localStorage.setItem(
-    "user",
-    JSON.stringify({ userId, nickname, accessToken })
-  );
+  localStorage.setItem("user", JSON.stringify({ userId, nickname }));
+  localStorage.setItem("token", accessToken);
 
   return { userId, nickname, accessToken };
 };
@@ -29,7 +28,8 @@ export const getUserProfile = async (token) => {
   return response.data;
 };
 
-export const updateProfile = async (formData, token) => {
+export const updateProfile = async (formData) => {
+  const token = localStorage.getItem("token");
   const response = await Api.patch("/profile", formData, {
     headers: {
       "Content-Type": "multipart/form-data",

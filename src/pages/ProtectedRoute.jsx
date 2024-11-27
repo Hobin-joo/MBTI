@@ -1,10 +1,13 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-export const ProtectedRoute = () => {
-  const user = localStorage.getItem("user");
+const ProtectedRoute = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   if (!user) {
     return <Navigate to="login" />;
   }
   return <Outlet />;
 };
+
+export default ProtectedRoute;
