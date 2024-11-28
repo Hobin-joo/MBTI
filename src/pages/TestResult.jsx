@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getTestResults } from "../api/testResults";
-import TestResultItem from "../components/TestResultItem";
+
+import TestResultList from "../components/TestResultList";
 
 const TestResult = () => {
   const [results, setResults] = useState([]);
@@ -22,7 +23,7 @@ const TestResult = () => {
         <h1 className="text-3xl font-bold text-primary-color mb-10 text-center">
           모든 테스트 결과
         </h1>
-        <TestResultItem results={results} setResults={setResults} />
+        <TestResultList results={results} setResults={setResults} />
       </div>
     </div>
   );

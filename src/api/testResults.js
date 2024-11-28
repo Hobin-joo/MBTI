@@ -23,6 +23,7 @@ export const createTestResult = async (mbtiResult) => {
 };
 
 //삭제
+
 export const deleteTestResult = async (id) => {
   const response = await axios.delete(`${API_URL}/${id}`);
   return response.data;

@@ -1,24 +1,30 @@
 import React from "react";
 import { deleteTestResult } from "../api/testResults";
+import { toast } from "react-toastify";
 
 const TestResultItem = ({ results, setResults }) => {
-  const handelDelete = async () => {
-    await deleteTestResult();
-    
+  const removeResult = (id) => {
+    setResults((result) => result.filter((item) => item.id !== id));
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteTestResult(results.id);
+      removeResult(results.id);
+    } catch (error) {
+      console.error(error);
+      toast.info("삭제 중 오류가 발생했습니다.");
+    }
   };
 
   return (
-    <>
-      {results.map((result, id) => (
-        <div key={id}>
-          <h4>{result.user}</h4>
-          <p>{result.mbtiResult}</p>
-          <p>{result.createAt}</p>
-          <p>{result.mbtiType}</p>
-          <button onClick={handelDelete}>삭제</button>
-        </div>
-      ))}
-    </>
+    <div>
+      <h4>{results.user}</h4>
+      <p>{results.mbtiResult}</p>
+      <p>{results.createAt}</p>
+      <p>{results.mbtiType}</p>
+      <button onClick={handleDelete}>삭제</button>
+    </div>
   );
 };
 
